@@ -9,6 +9,7 @@ import {CurrentTime} from './CurrentTime/CurrentTime';
 
 export const Post = ({postData}) => {
   const {title, author, ups, date} = postData;
+  console.log(typeof(postData), 'postData');
   console.log(author, ups, date);
   return (
     <li className={style.post}>
@@ -22,5 +23,5 @@ export const Post = ({postData}) => {
 };
 
 Post.propTypes = {
-  postData: PropTypes.object,
+  postData: PropTypes.any,
 };

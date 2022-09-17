@@ -1,0 +1,39 @@
+.center {
+    text-align: center;
+  }
+  
+  .black {
+    color: var(--black);
+  }
+  
+  .orange {
+    color: var(--orange);
+  }
+  
+  .blue {
+    color: var(--blue);
+  }
+  
+  .green {
+    color: var(--green);
+  }
+  
+  .white {
+    color: var(--white);
+  }
+  
+  .grayF5 {
+    color: var(--grayF5);
+  }
+  
+  .greyED {
+    color: var(--greyED);
+  }
+  
+  .greyE6 {
+    color: var(--greyE6);
+  }
+  
+  .greyD9 {
+    color: var(--greyD9);
+  }

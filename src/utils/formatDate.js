@@ -10,4 +10,5 @@ const formatDate = date => {
     .format(new Date(date));
 };
 
+
 export default formatDate;
