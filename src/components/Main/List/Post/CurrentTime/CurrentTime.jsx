@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 
 export const CurrentTime = ({date}) => {
   console.log(typeof(date), 'date');
+
   return (
-    <time className={style.date} dateTime={date}>{formatDate(date)}</time>
+    <time className={style.date}
+      dateTime={date}>{formatDate(date)}</time>
   );
 };
 

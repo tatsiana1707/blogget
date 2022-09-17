@@ -37,17 +37,11 @@ export const List = () => {
   console.log(style);
   return (
     <ul className={style.list}>
-      {postsData.map((postData, index) => (
+      {postsData.map((postsData, index) => (
         <Post key={index} postData={postsData} />
       ))}
-      {
-        [
-          <Post key={0} postData={postsData[0]} />,
-          <Post key={1} postData={postsData[1]} />,
-          <Post key={3} postData={postsData[2]} />,
-          <Post key={4} postData={postsData[3]} />,
-        ]
-      }
     </ul>
   );
 };
+
+

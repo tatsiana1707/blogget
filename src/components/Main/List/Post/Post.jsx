@@ -8,9 +8,10 @@ import {CurrentTime} from './CurrentTime/CurrentTime';
 
 
 export const Post = ({postData}) => {
+  console.log(postData);
   const {title, author, ups, date} = postData;
-  console.log(typeof(postData), 'postData');
-  console.log(author, ups, date);
+  console.log(typeof date, 'postData');
+
   return (
     <li className={style.post}>
       <Avatar title={title}/>
@@ -25,3 +26,4 @@ export const Post = ({postData}) => {
 Post.propTypes = {
   postData: PropTypes.any,
 };
+

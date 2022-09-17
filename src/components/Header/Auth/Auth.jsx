@@ -6,7 +6,12 @@ export const Auth = ({auth}) => {
   console.log(style);
   return (
     <button className={style.button}>
-      {auth ? auth : <LoginIcon/>
+      {auth ? auth :
+      <LoginIcon
+        color='var(--orange)'
+        width= '100%'
+        height= '100%'
+      />
       }
     </button>
   );

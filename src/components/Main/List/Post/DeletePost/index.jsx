@@ -1,3 +1,3 @@
-import { DeletePost } from './DeletePost';
+import {DeletePost} from './DeletePost';
 export default DeletePost;
 

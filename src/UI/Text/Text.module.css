@@ -37,3 +37,11 @@
   .greyD9 {
     color: var(--greyD9);
   }
+
+  .bold {
+   font-weight: bold;
+  }
+
+  .medium {
+    font-weight: medium;
+  }
