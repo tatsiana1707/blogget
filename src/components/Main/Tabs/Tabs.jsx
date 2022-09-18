@@ -21,7 +21,7 @@ const LIST = [
 export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropDown] = useState(true);
-  const [title, setTitle] = useState('add item');
+  const [title, setTitle] = useState('add Item');
 
   const chooseItem = (e) => {
     e.preventDefault();
