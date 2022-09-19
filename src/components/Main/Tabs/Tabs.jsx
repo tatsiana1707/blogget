@@ -21,7 +21,7 @@ const LIST = [
 export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropDown] = useState(true);
-  const [title, setTitle] = useState('add Item');
+  const [title, setTitle] = useState('Выбрать');
 
   const chooseItem = (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ export const Tabs = () => {
 
   useEffect(() => {
     const debounceResize = debounceRaf(handleResize);
-    debounceRaf();
+    debounceResize();
     window.addEventListener('resize', debounceResize);
     return () => {
       window.removeEventListener('resize', debounceResize);
