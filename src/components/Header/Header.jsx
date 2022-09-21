@@ -4,8 +4,9 @@ import Logo from './Logo';
 import Search from './Search';
 import Auth from './Auth';
 import Heading from './Heading';
+import PropTypes from 'prop-types';
 
-export const Header = () => {
+export const Header = ({token, delToken}) => {
   console.log(style);
   return (
     <header className={style.header}>
@@ -14,11 +15,16 @@ export const Header = () => {
           <Logo/>
           <Heading text="Главная"/>
           <Search/>
-          <Auth auth={false}/>
+          <Auth token={token} delToken={delToken}/>
         </div>
       </Layout>
     </header>
   );
+};
+
+Header.propTypes = {
+  token: PropTypes.string,
+  delToken: PropTypes.string,
 };
 
 
