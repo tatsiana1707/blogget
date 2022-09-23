@@ -1,49 +1,27 @@
-import {useEffect, useState} from 'react';
 import style from './Auth.module.css';
+import {useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {URL_API} from '../../../api/const';
+import {tokenContext} from '../../../context/tokenContext';
+import {authContext} from '../../../context/authContext';
 
 
-export const Auth = ({token}) => {
-  const [auth, setAuth] = useState({});
+export const Auth = () => {
+  const {delToken} = useContext(tokenContext);
+  const {auth, clearAuth} = useContext(authContext);
   const [isShown, setIsShown] = useState(true);
 
-  useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      }
-    })
-      .then(response => response.json())
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
-      })
-      .catch(err => {
-        if (err.response.status === 401) {
-          localStorage.clear();
-          console.error(err);
-        }
-        console.error(err);
-        setAuth({});
-      });
-  }, [token]);
   console.log(style);
 
   const toggle = (e) => {
-    setIsShown(current => !current);
+    setIsShown(!isShown);
   };
 
   const deleteToken = (e) => {
-    if (auth.name) {
-      setAuth({});
-      localStorage.clear();
-    }
+    delToken();
+    clearAuth();
   };
 
   return (
@@ -74,6 +52,7 @@ export const Auth = ({token}) => {
 
 Auth.propTypes = {
   token: PropTypes.string,
+  delToken: PropTypes.func,
 };
 
 

@@ -1,8 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
+import {tokenContext} from '../context/tokenContext';
 
-export const useToken = (state) => {
-  const [token, setToken] = useState(state);
-  const [delToken, removeToken] = useState(state);
+export const useToken = () => {
+  const [token, setToken] = useState('');
+  const {delToken} = useContext(tokenContext);
+
 
   useEffect(() => {
     if (location.pathname.includes('/auth')) {
@@ -24,7 +26,7 @@ export const useToken = (state) => {
 
   useEffect(() => {
     if (delToken) {
-      removeToken(localStorage.removeItem('bearer'));
+      setToken(localStorage.removeItem('bearer'));
     }
   }, [delToken]);
 
