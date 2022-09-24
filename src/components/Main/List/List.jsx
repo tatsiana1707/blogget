@@ -2,6 +2,7 @@
 import style from './List.module.css';
 import Post from './Post';
 
+
 export const List = () => {
   const postsData = [
     {
@@ -37,8 +38,8 @@ export const List = () => {
   console.log(style);
   return (
     <ul className={style.list}>
-      {postsData.map((postsData, index) => (
-        <Post key={index} postData={postsData} />
+      {postsData.map((data, index) => (
+        <Post key={index} data={data} />
       ))}
     </ul>
   );

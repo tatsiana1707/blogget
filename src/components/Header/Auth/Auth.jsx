@@ -9,7 +9,7 @@ import {authContext} from '../../../context/authContext';
 
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
+  const {deleteToken} = useContext(tokenContext);
   const {auth, clearAuth} = useContext(authContext);
   const [isShown, setIsShown] = useState(true);
 
@@ -19,8 +19,8 @@ export const Auth = () => {
     setIsShown(!isShown);
   };
 
-  const deleteToken = (e) => {
-    delToken();
+  const logout = (e) => {
+    deleteToken();
     clearAuth();
   };
 
@@ -34,7 +34,7 @@ export const Auth = () => {
           </button>
           {!isShown && (
             <button className={style.logout}
-              onClick={deleteToken}>Выйти</button>
+              onClick={logout}>Выйти</button>
           )}
         </>
         ) : (
@@ -52,7 +52,6 @@ export const Auth = () => {
 
 Auth.propTypes = {
   token: PropTypes.string,
-  delToken: PropTypes.func,
 };
 
 

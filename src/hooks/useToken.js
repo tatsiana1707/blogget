@@ -1,9 +1,8 @@
-import {useState, useEffect, useContext} from 'react';
-import {tokenContext} from '../context/tokenContext';
+import {useState, useEffect} from 'react';
+
 
 export const useToken = () => {
   const [token, setToken] = useState('');
-  const {delToken} = useContext(tokenContext);
 
 
   useEffect(() => {
@@ -24,12 +23,10 @@ export const useToken = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (delToken) {
-      setToken(localStorage.removeItem('bearer'));
-    }
-  }, [delToken]);
+  const deleteToken = () => {
+    setToken('');
+    localStorage.removeItem('bearer');
+  };
 
-
-  return [token, delToken];
+  return [token, deleteToken];
 };

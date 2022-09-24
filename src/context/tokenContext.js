@@ -5,10 +5,10 @@ import {useToken} from '../hooks/useToken';
 export const tokenContext = React.createContext({});
 
 export const TokenContextProvider = ({children}) => {
-  const [token, delToken] = useToken('');
+  const [token, deleteToken] = useToken('');
 
   return (
-    <tokenContext.Provider value={{token, delToken}}>
+    <tokenContext.Provider value={{token, deleteToken}}>
       {children}
     </tokenContext.Provider>
   );
