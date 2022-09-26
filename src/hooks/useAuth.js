@@ -15,18 +15,20 @@ export const useAuth = () => {
     fetch(`${URL_API}/api/v1/me`, {
       headers: {
         Authorization: `bearer ${token}`,
-      }
+      },
+      mode: 'cors',
     })
-      .then(response => response.json())
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.replace(/\?.*$/, '');
         setAuth({name, img});
       })
-      .catch(err => {
-        if (err.response.status === 401) {
-          localStorage.clear();
-          console.error(err);
-        }
+      .catch((err) => {
         console.error(err);
         setAuth({});
         deleteToken();

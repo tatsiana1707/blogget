@@ -11,6 +11,7 @@ import {useEffect} from 'react';
 import {debounceRaf} from '../../../utils/debounce.js';
 import {Text} from '../../../UI/Text';
 
+
 const LIST = [
   {value: 'Главная', Icon: HomeIcon},
   {value: 'Топ', Icon: TopIcon},
@@ -22,6 +23,7 @@ export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropDown] = useState(true);
   const [title, setTitle] = useState('Выбрать');
+
 
   const chooseItem = (e) => {
     e.preventDefault();

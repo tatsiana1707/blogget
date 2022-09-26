@@ -1,23 +1,27 @@
 import {useState, useEffect} from 'react';
-import {useContext} from 'react';
 import {URL_API} from '../api/const';
-import {postsContext} from './../context/postsContext';
+
 
 export const useFetch = () => {
-  const [content, setContent] = useState([]);
-  const {data} = useContext(postsContext);
-
+  const [content, setContent] = useState(null);
 
   useEffect(() => {
-    if (!data) return;
-    fetch(`${URL_API}/api/best`)
-      .then(res => res.json())
+    fetch(`${URL_API}/best`, {mode: 'cors'})
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then(data => {
         setContent([data]); console.log(data, 'res');
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setContent();
+      });
   },
   []);
-  return {content};
+  return [content];
 };
 
