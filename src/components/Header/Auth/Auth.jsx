@@ -13,8 +13,6 @@ export const Auth = () => {
   const {auth, clearAuth} = useContext(authContext);
   const [isShown, setIsShown] = useState(true);
 
-  console.log(style);
-
   const toggle = (e) => {
     setIsShown(!isShown);
   };

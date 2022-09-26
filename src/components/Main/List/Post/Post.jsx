@@ -1,27 +1,23 @@
 import style from './Post.module.css';
-import {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {Avatar} from './Avatar/Avatar';
 import {PostContent} from './PostContent/PostContent';
 import {Rating} from './Rating/Rating';
 import {DeletePost} from './DeletePost/DeletePost';
 import {CurrentTime} from './CurrentTime/CurrentTime';
-import {postsContext} from '../../../../context/postsContext';
 
 
-export const Post = () => {
-  const {data} = useContext(postsContext);
-  console.log(data);
-
-  console.log(typeof date, 'postData');
-
+export const Post = ({postData}) => {
+  console.log(postData, 'postData');
+  const {title, author, ups, date} = postData;
+  console.log(postData, 'postData');
   return (
     <li className={style.post}>
-      <Avatar title={data.title}/>
-      <PostContent author={data.author} title={data.title}/>
-      <Rating ups={data.ups}/>
-      <DeletePost title={data.title}/>
-      <CurrentTime date={data.date}/>
+      <Avatar title={title}/>
+      <PostContent author={author} title={title}/>
+      <Rating ups={ups}/>
+      <DeletePost title={title}/>
+      <CurrentTime date={date}/>
     </li>
   );
 };

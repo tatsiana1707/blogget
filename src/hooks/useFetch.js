@@ -1,19 +1,23 @@
-import {useState} from 'react';
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import {useContext} from 'react';
 import {URL_API} from '../api/const';
+import {postsContext} from './../context/postsContext';
 
 export const useFetch = () => {
-  const [data, setData] = useState([]);
+  const [content, setContent] = useState([]);
+  const {data} = useContext(postsContext);
+
 
   useEffect(() => {
-    if (!URL_API) return;
-    const fetchData = async () => {
-      const response = await fetch(`${URL_API}/api/best`);
-      const data = await response.json();
-      setData(data);
-    };
-    fetchData();
-  }, [URL_API]);
-  console.log(data);
-  return {data};
+    if (!data) return;
+    fetch(`${URL_API}/api/best`)
+      .then(res => res.json())
+      .then(data => {
+        setContent([data]); console.log(data, 'res');
+      })
+      .catch(err => console.log(err));
+  },
+  []);
+  return {content};
 };
+

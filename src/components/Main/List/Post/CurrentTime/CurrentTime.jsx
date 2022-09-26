@@ -3,7 +3,7 @@ import formatDate from '../../../../../utils/formatDate';
 import PropTypes from 'prop-types';
 
 export const CurrentTime = ({date}) => {
-  console.log(typeof(date), 'date');
+  console.log(typeof(date), date, 'date');
 
   return (
     <time className={style.date}
