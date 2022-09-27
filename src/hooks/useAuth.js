@@ -16,7 +16,6 @@ export const useAuth = () => {
       headers: {
         Authorization: `bearer ${token}`,
       },
-      mode: 'cors',
     })
       .then((response) => {
         if (response.status === 401) {

@@ -4,16 +4,13 @@ import Tabs from './Tabs';
 import List from './List';
 
 
-export const Main = () => {
-  console.log(style);
-  return (
-    <main className={style.main}>
-      <Layout>
-        <Tabs />
-        <List />
-      </Layout>
-    </main>
-  );
-};
+export const Main = () => (
+  <main className={style.main}>
+    <Layout>
+      <Tabs />
+      <List />
+    </Layout>
+  </main>
+);
 
 

@@ -1,12 +1,17 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {URL_API} from '../api/const';
+import {tokenContext} from '../context/tokenContext';
 
 
 export const useFetch = () => {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({});
+  const {token} = useContext(tokenContext);
+
 
   useEffect(() => {
-    fetch(`${URL_API}/best`, {mode: 'cors'})
+    if (!token) return;
+
+    fetch(`${URL_API}/best`)
       .then((response) => {
         if (response.status === 401) {
           throw new Error(response.status);
@@ -14,14 +19,14 @@ export const useFetch = () => {
         return response.json();
       })
       .then(data => {
-        setContent([data]); console.log(data, 'res');
+        setContent(); console.log(data, 'res');
       })
       .catch((err) => {
         console.log(err);
-        setContent();
+        setContent([]);
       });
   },
-  []);
+  [token]);
   return [content];
 };
 
