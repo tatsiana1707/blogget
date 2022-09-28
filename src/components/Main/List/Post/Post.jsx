@@ -12,7 +12,7 @@ export const Post = (data) => {
 
   return (
     <li className={style.post}>
-      <Avatar title={thumbnail}/>
+      <Avatar thumbnail={thumbnail} title={title}/>
       <PostContent author={author} title={title}/>
       <Rating ups={ups}/>
       <DeletePost title={title}/>
