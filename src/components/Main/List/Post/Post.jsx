@@ -8,15 +8,15 @@ import {CurrentTime} from './CurrentTime/CurrentTime';
 
 
 export const Post = (data) => {
-  console.log(data, 'data');
+  const {data: {thumbnail, author, title, ups, created}} = data;
 
   return (
     <li className={style.post}>
-      <Avatar title={data.title}/>
-      <PostContent author={data.author} title={data.title}/>
-      <Rating ups={data.ups}/>
-      <DeletePost title={data.title}/>
-      <CurrentTime date={data.date}/>
+      <Avatar title={thumbnail}/>
+      <PostContent author={author} title={title}/>
+      <Rating ups={ups}/>
+      <DeletePost title={title}/>
+      <CurrentTime date={created}/>
     </li>
   );
 };

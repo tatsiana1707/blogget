@@ -6,14 +6,16 @@ import Post from './Post';
 
 
 export const List = () => {
-  const {data} = useContext(postsContext);
-  console.log(data, 'data');
+  const {dat} = useContext(postsContext);
+  const {...obj} = dat;
+  const {...data} = obj;
 
   return (
     <ul className={style.list}>
-      {Object.values(data).map((data, index) => (
-        <Post key={index} data={data} />
-      ))}
+      {Object.values(data).map((d, index) => (
+        <Post key={index} data={d.data} />
+      ))
+      }
     </ul>
   );
 };

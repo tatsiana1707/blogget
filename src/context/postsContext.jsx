@@ -5,11 +5,11 @@ import {useFetch} from '../hooks/useFetch.js';
 export const postsContext = React.createContext({});
 
 export const PostsContextProvider = ({children}) => {
-  const [data] = useFetch();
-  console.log(data);
+  const [dat] = useFetch();
+  console.log(dat);
 
   return (
-    <postsContext.Provider value={{data}}>
+    <postsContext.Provider value={{dat}}>
       {children}
     </postsContext.Provider>
   );

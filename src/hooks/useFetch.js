@@ -4,14 +4,18 @@ import {tokenContext} from '../context/tokenContext';
 
 
 export const useFetch = () => {
-  const [content, setContent] = useState({});
+  const [data, setContent] = useState({});
   const {token} = useContext(tokenContext);
 
 
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${URL_API}/best`)
+    fetch(`${URL_API}/best`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    })
       .then((response) => {
         if (response.status === 401) {
           throw new Error(response.status);
@@ -19,7 +23,7 @@ export const useFetch = () => {
         return response.json();
       })
       .then(data => {
-        setContent(); console.log(data, 'res');
+        setContent([...data.data.children]); console.log(data, 'res');
       })
       .catch((err) => {
         console.log(err);
@@ -27,6 +31,6 @@ export const useFetch = () => {
       });
   },
   [token]);
-  return [content];
+  return [data];
 };
 
