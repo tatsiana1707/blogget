@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 
 export const Avatar = ({title, thumbnail}) => {
-  console.log(thumbnail);
   const [showImage, setShowImage] = useState(true);
   const hideImg = (event) => {
     setShowImage(false);

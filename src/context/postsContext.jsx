@@ -6,7 +6,6 @@ export const postsContext = React.createContext({});
 
 export const PostsContextProvider = ({children}) => {
   const [data] = useFetch();
-  console.log(data);
 
   return (
     <postsContext.Provider value={{data}}>

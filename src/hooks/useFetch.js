@@ -23,7 +23,7 @@ export const useFetch = () => {
         return response.json();
       })
       .then(data => {
-        setContent([...data.data.children]); console.log(data, 'res');
+        setContent([...data.data.children]);
       })
       .catch((err) => {
         console.log(err);
