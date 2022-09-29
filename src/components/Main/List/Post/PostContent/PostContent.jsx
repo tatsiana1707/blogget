@@ -6,18 +6,20 @@ import {Modal} from '../../../../Modal/Modal';
 
 export const PostContent = ({title, author, markdown}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(isModalOpen, 'isModalOpen');
   return (
     <div className={style.content}>
       <Text As='h2' className={style.title}>
         <Text
           As='a'
-          size={18}
-          tsize={24}
+          bold
+          size={14}
+          tsize={22}
           className={style.linkPost}
           href='#post'
           onClick={() => {
             setIsModalOpen(true);
+            console.log(isModalOpen, 'isModalOpen');
           }}
         >
           {title}
@@ -27,13 +29,21 @@ export const PostContent = ({title, author, markdown}) => {
         As='a'
         size={12}
         tsize={14}
+        medium
         color='orange'
         className={style.linkAuthor}
         href="#author">
         {author}
       </Text>
-      {isModalOpen &&
-      (<Modal author={author} title={title} markdown={markdown}/>)}
+      {isModalOpen && (
+        <Modal
+          author={author}
+          title={title}
+          markdown={markdown}
+          closeModal={() => {
+            setIsModalOpen(false);
+          }}/>
+      )}
     </div>
   );
 };
