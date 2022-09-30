@@ -5,7 +5,7 @@ import {useState} from 'react';
 import {Modal} from '../../../../Modal/Modal';
 
 export const PostContent = ({title, author, markdown}) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   console.log(isModalOpen, 'isModalOpen');
   return (
     <div className={style.content}>
