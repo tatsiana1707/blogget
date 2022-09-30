@@ -9,13 +9,13 @@ import {CurrentTime} from './CurrentTime/CurrentTime';
 
 export const Post = (data) => {
   const {data: {thumbnail, author, title, ups,
-    created, selftext: markdown}
+    created, selftext: markdown, id}
   } = data;
-
+  console.log(data, 'data');
   return (
     <li className={style.post}>
       <Avatar thumbnail={thumbnail} title={title}/>
-      <PostContent author={author} title={title} markdown={markdown}/>
+      <PostContent author={author} title={title} markdown={markdown} id={id}/>
       <Rating ups={ups}/>
       <DeletePost title={title}/>
       <CurrentTime date={created}/>

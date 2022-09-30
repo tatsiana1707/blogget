@@ -36,8 +36,7 @@ export const Modal = ({title, author, markdown, closeModal}) => {
                 },
               },
             },
-          }}
-          >
+          }}>
             {markdown}
           </Markdown>
         </div>

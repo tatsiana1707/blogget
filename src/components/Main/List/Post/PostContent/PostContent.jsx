@@ -2,7 +2,7 @@ import style from './PostContent.module.css';
 import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 import {useState} from 'react';
-import {Modal} from '../../../../Modal/Modal';
+import Modal from '../../../../Modal';
 
 export const PostContent = ({title, author, markdown}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
