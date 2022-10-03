@@ -11,7 +11,6 @@ export const Post = (data) => {
   const {data: {thumbnail, author, title, ups,
     created, selftext: markdown, id}
   } = data;
-  console.log(data, 'data');
   return (
     <li className={style.post}>
       <Avatar thumbnail={thumbnail} title={title}/>
