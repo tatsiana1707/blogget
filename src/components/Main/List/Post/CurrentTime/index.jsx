@@ -1,3 +1,3 @@
-import { CurrentTime } from './CurrentTime';
+import {CurrentTime} from './CurrentTime';
 export default CurrentTime;
 

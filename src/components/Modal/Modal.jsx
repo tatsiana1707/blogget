@@ -9,11 +9,14 @@ import {Comments} from './Comments/Comments';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {useState} from 'react';
 
+
 export const Modal = ({id, closeModal}) => {
   const overlayRef = useRef(null);
-  const [postData] = useCommentsData(id);
-  console.log(postData);
-  const [post, setPost] = useState({});
+  const [showForm, setShowForm] = useState(false);
+  const [post, isLoading] = useCommentsData(id);
+
+  console.log(typeof post.comments);
+  console.log(post);
 
   const handleClick = (e) => {
     const target = e.target;
@@ -25,11 +28,6 @@ export const Modal = ({id, closeModal}) => {
   const closeOnIcon = () => {
     closeModal();
   };
-
-  useEffect(() => {
-    console.log(post, postData);
-    setPost(postData);
-  }, []);
 
 
   useEffect(() => {
@@ -53,26 +51,37 @@ export const Modal = ({id, closeModal}) => {
   return ReactDOM.createPortal(
 
     <div className={style.overlay} ref={overlayRef}>
+
       <div className={style.modal}>
-        <h2 className={style.title}>title</h2>
+        {isLoading ?
+      (
+          <>
+            <h2 className={style.title}>{post.post.title}</h2>
 
-        <div className={style.content}>
-          <Markdown options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
+            <div className={style.content}>
+              <Markdown options={{
+                overrides: {
+                  a: {
+                    props: {
+                      target: '_blank',
+                    },
+                  },
                 },
-              },
-            },
-          }}>
-            markdown
-          </Markdown>
-        </div>
+              }}>
+                {post.post.selftext}
+              </Markdown>
+            </div>
 
-        <p className={style.author}>author</p>
-        <FormComment/>
-        <Comments/>
+            <p className={style.author}>{post.post.author}</p>
+            { showForm ?
+            (
+            <FormComment/>
+          ) : (<button className={style.btn}
+            onClick={() => setShowForm(true)}>Написать комментарий</button>)}
+            <Comments comments={post.comments}/>
+          </>
+      ) : (<h2>Загрузка...</h2>)
+        }
         <button className={style.close} onClick={closeOnIcon}>
           <CloseIcon/>
         </button>
@@ -84,6 +93,7 @@ export const Modal = ({id, closeModal}) => {
 
 
 Modal.propTypes = {
+  post: PropTypes.any,
   title: PropTypes.string,
   author: PropTypes.string,
   markdown: PropTypes.string,

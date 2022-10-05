@@ -5,6 +5,7 @@ import {tokenContext} from '../context/tokenContext';
 export const useCommentsData = (id) => {
   const {token} = useContext(tokenContext);
   const [postData, setCommentsData] = useState({});
+  const [isLoading, setLoading] = useState(false);
   console.log(id);
   useEffect(() => {
     if (!token) return;
@@ -33,15 +34,15 @@ export const useCommentsData = (id) => {
           },
         ]) => {
           const comments = children.map(item => item.data);
-          setCommentsData([post, comments]);
+          setCommentsData({post, comments});
+          setLoading(true);
           console.log(post, comments, 'comments');
         },
       )
       .catch((err) => {
         console.error(err);
-        setCommentsData([]);
       });
   }, [token]);
   console.log(postData, 'post');
-  return [postData];
+  return [postData, isLoading];
 };
