@@ -1,5 +1,6 @@
 import style from './Comments.module.css';
 import {Text} from '../../../UI/Text';
+import PropTypes from 'prop-types';
 import {CurrentTime} from './../../Main/List/Post/CurrentTime/CurrentTime';
 
 export const Comments = ({comments}) => {
@@ -7,8 +8,9 @@ export const Comments = ({comments}) => {
   return (<ul className={style.list}>
 
     {comments.length ? (
-      comments.map(({author, body, id, created}) => (
-        created &&
+      comments.filter((item) => item.author !== 'deleted')
+        .map(({author, body, id, created}) => (
+          created &&
         <li key={id} className={style.item}>
           <Text As='h3' className={style.author} size={18} tsize={22}>
             {author}</Text>
@@ -17,7 +19,7 @@ export const Comments = ({comments}) => {
           </Text>
           <CurrentTime date={created}/>
         </li>
-      ))
+        ))
     ) :
     (
       <p>Нет комментариев</p>
@@ -25,5 +27,10 @@ export const Comments = ({comments}) => {
 
   </ul>
   );
+};
+
+
+Comments.propTypes = {
+  comments: PropTypes.any,
 };
 

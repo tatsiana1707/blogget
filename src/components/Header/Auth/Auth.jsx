@@ -4,21 +4,24 @@ import PropTypes from 'prop-types';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteToken} from '../../../store';
 
 
 export const Auth = () => {
-  const {deleteToken} = useContext(tokenContext);
   const {auth, clearAuth} = useContext(authContext);
   const [isShown, setIsShown] = useState(true);
+  const token = useSelector(state => state.token);
+  const dispatch = useDispatch();
+
 
   const toggle = (e) => {
     setIsShown(!isShown);
   };
 
   const logout = (e) => {
-    deleteToken();
+    dispatch(deleteToken(token));
     clearAuth();
   };
 

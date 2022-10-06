@@ -1,13 +1,14 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {URL_API} from '../api/const';
-import {tokenContext} from '../context/tokenContext';
-
+import {updateToken} from '../store';
 
 export const useFetch = () => {
   const [data, setContent] = useState({});
-  const {token} = useContext(tokenContext);
+  const token = useSelector(state => state.token);
+  const dispatch = useDispatch();
 
-
+  dispatch(updateToken(token));
   useEffect(() => {
     if (!token) return;
 
