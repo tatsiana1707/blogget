@@ -13,10 +13,10 @@ import {useState} from 'react';
 export const Modal = ({id, closeModal}) => {
   const overlayRef = useRef(null);
   const [showForm, setShowForm] = useState(false);
-  const [post, isLoading] = useCommentsData(id);
-
-  console.log(typeof post.comments);
-  console.log(post);
+  const [post, status] = useCommentsData(id);
+  console.log(status);
+  console.log(post[0]);
+  console.log(id);
 
   const handleClick = (e) => {
     const target = e.target;
@@ -53,10 +53,11 @@ export const Modal = ({id, closeModal}) => {
     <div className={style.overlay} ref={overlayRef}>
 
       <div className={style.modal}>
-        {isLoading ?
-      (
+        {status === 'loading' && 'Загрузка...'}
+        {status === 'error' && 'ошибка'}
+        {status === 'loaded' && (
           <>
-            <h2 className={style.title}>{post.post.title}</h2>
+            <h2 className={style.title}>{post[0].title}</h2>
 
             <div className={style.content}>
               <Markdown options={{
@@ -68,20 +69,19 @@ export const Modal = ({id, closeModal}) => {
                   },
                 },
               }}>
-                {post.post.selftext}
+                {post[0].selftext}
               </Markdown>
             </div>
 
-            <p className={style.author}>{post.post.author}</p>
+            <p className={style.author}>{post[0].author}</p>
             { showForm ?
             (
             <FormComment/>
           ) : (<button className={style.btn}
             onClick={() => setShowForm(true)}>Написать комментарий</button>)}
-            <Comments comments={post.comments}/>
+            <Comments comments={post[1]}/>
           </>
-      ) : (<h2>Загрузка...</h2>)
-        }
+        )}
         <button className={style.close} onClick={closeOnIcon}>
           <CloseIcon/>
         </button>

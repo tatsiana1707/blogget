@@ -3,11 +3,9 @@ import {Text} from '../../../UI/Text';
 import PropTypes from 'prop-types';
 import {CurrentTime} from './../../Main/List/Post/CurrentTime/CurrentTime';
 
-export const Comments = ({comments}) => {
-  console.log(comments);
-  return (<ul className={style.list}>
+export const Comments = ({comments}) => (<ul className={style.list}>
 
-    {comments.length ? (
+  {comments.length ? (
       comments.filter((item) => item.author !== 'deleted')
         .map(({author, body, id, created}) => (
           created &&
@@ -25,9 +23,8 @@ export const Comments = ({comments}) => {
       <p>Нет комментариев</p>
     )}
 
-  </ul>
-  );
-};
+</ul>
+);
 
 
 Comments.propTypes = {
