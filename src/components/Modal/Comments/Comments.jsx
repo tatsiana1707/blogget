@@ -8,7 +8,7 @@ export const Comments = ({comments}) => (<ul className={style.list}>
   {comments.length ? (
       comments.filter((item) => item.author !== 'deleted')
         .map(({author, body, id, created}) => (
-          created &&
+          body &&
         <li key={id} className={style.item}>
           <Text As='h3' className={style.author} size={18} tsize={22}>
             {author}</Text>

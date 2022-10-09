@@ -8,9 +8,12 @@ import FormComment from './FormComment';
 import {Comments} from './Comments/Comments';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 
 
-export const Modal = ({id, closeModal}) => {
+export const Modal = () => {
+  const {id, page} = useParams();
+  const navigate = useNavigate();
   const overlayRef = useRef(null);
   const [showForm, setShowForm] = useState(false);
   const [post, status] = useCommentsData(id);
@@ -21,23 +24,25 @@ export const Modal = ({id, closeModal}) => {
   const handleClick = (e) => {
     const target = e.target;
     if (target === overlayRef.current) {
-      closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
   const closeOnIcon = () => {
-    closeModal();
+    navigate(`/category/${page}`);
   };
 
 
   useEffect(() => {
     const handleEscapeKey = (e) => {
       if (e.code === 'Escape') {
-        closeModal();
+        navigate(`/category/${page}`);
       }
     };
     document.addEventListener('keydown', handleEscapeKey);
-    return () => document.removeEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
   }, []);
 
   useEffect(() => {

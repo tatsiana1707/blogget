@@ -5,7 +5,7 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteToken} from '../../../store/reducer/tokenReducer';
+import {deleteToken} from '../../../store/token/tokenReducer';
 import {useAuth} from '../../../hooks/useAuth';
 import PreLoader from '../../../UI/Preloader';
 

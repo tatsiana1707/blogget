@@ -1,7 +1,7 @@
 import {COMMENTS_REQUEST,
   COMMENTS_REQUEST_ERROR,
   COMMENTS_REQUEST_SUCCESS,
-} from '../action/commentsDataAction';
+} from './commentsDataAction';
 
 const initialState = {
   status: '',

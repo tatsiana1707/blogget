@@ -1,8 +1,9 @@
 import Header from './components/Header';
 import Main from './components/Main';
 import {useDispatch} from 'react-redux';
-import {updateToken} from './store/reducer/tokenReducer';
+import {updateToken} from './store/token/tokenReducer';
 import {getToken} from './api/token';
+import {Route, Routes} from 'react-router-dom';
 
 
 function App() {
@@ -11,10 +12,18 @@ function App() {
   dispatch(updateToken(getToken()));
 
   return (
-    <>
-      <Header/>
-      <Main/>
-    </>
+    <Routes>
+      <Route
+        path='*'
+        element={
+          <>
+            <Header/>
+            <Main/>
+          </>
+        }
+      >
+      </Route>
+    </Routes>
   );
 }
 

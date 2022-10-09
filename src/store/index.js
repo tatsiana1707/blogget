@@ -1,11 +1,11 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from '@redux-devtools/extension';
-import {tokenMiddleware, tokenReducer} from './reducer/tokenReducer';
-import {commentReducer} from './reducer/commentReducer';
+import {tokenMiddleware, tokenReducer} from './token/tokenReducer';
+import {commentReducer} from './comment/commentReducer';
 import thunk from 'redux-thunk';
-import {authReducer} from './reducer/authReducer';
-import {postReducer} from './reducer/postReducer';
-import {commentsDataReducer} from './reducer/commentsDataReducer';
+import {authReducer} from './auth/authReducer';
+import {postReducer} from './post/postReducer';
+import {commentsDataReducer} from './comments/commentsDataReducer';
 
 
 const rootReducer = combineReducers({
