@@ -1,5 +1,5 @@
 import List from './List';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import Modal from '../Modal';
 import Home from '../../pages/Home';
 import NotFound from '../../pages/NotFound';
@@ -20,6 +20,7 @@ export const Main = () => (
             <Route path='post/:id' element={<Modal/>}/>
           </Route>
           <Route path='category/' element={<Home/>}/>
+          <Route path='auth' element={<Navigate to='/' />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
