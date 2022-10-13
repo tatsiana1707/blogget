@@ -2,7 +2,7 @@
 import style from './List.module.css';
 import Post from './Post';
 import {useRef, useEffect} from 'react';
-import {useParams, Outlet} from 'react-router-dom';
+import {Outlet, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {postRequestAsync} from '../../../store/post/postAction';
 
@@ -20,6 +20,7 @@ export const List = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
+      console.log(entries);
       if (entries[0].isIntersecting) {
         dispatch(postRequestAsync());
       }
@@ -39,8 +40,8 @@ export const List = () => {
   return (
     <>
       <ul className={style.list}>
-        {Object.values(data).map(({data}, index) => (
-          <Post key={index} data={data} />
+        {Object.values(data).map(({data}) => (
+          <Post key={data.id} data={data} />
         ))}
         <li ref={endList} className={style.end}/>
       </ul>

@@ -7,7 +7,7 @@ import {POST_REQUEST,
 
 const initialState = {
   loading: false,
-  data: {},
+  data: [],
   error: '',
   after: '',
   isLast: false,

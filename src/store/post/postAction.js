@@ -6,19 +6,20 @@ export const POST_REQUEST_SUCCESS = 'POST_REQUEST_SUCCESS';
 export const POST_REQUEST_ERROR = 'POST_REQUEST_ERROR';
 export const POST_REQUEST_SUCCESS_AFTER = 'POST_REQUEST_SUCCESS_AFTER';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
+
 export const postRequest = () => ({
   type: POST_REQUEST,
 });
 
 export const postRequestSuccess = (data) => ({
   type: POST_REQUEST_SUCCESS,
-  data,
+  data: data.children,
   after: data.after,
 });
 
 export const postRequestSuccessAfter = (data) => ({
   type: POST_REQUEST_SUCCESS_AFTER,
-  data,
+  data: data.children,
   after: data.after,
 });
 
@@ -53,11 +54,11 @@ export const postRequestAsync = (newPage) => (dispatch, getState) => {
       Authorization: `bearer ${token}`,
     },
   })
-    .then(({data: {data: {children: data}}}) => {
+    .then(({data}) => {
       if (after) {
-        dispatch(postRequestSuccessAfter(data));
+        dispatch(postRequestSuccessAfter(data.data));
       } else {
-        dispatch(postRequestSuccess(data));
+        dispatch(postRequestSuccess(data.data));
       }
     })
     .catch((err) => {
