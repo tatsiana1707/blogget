@@ -14,7 +14,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 const LIST = [
-  {value: 'Главная', Icon: HomeIcon, link: ''},
+  {value: 'Главная', Icon: HomeIcon, link: 'home'},
   {value: 'Топ', Icon: TopIcon, link: 'top'},
   {value: 'Лучшие', Icon: BestIcon, link: 'best'},
   {value: 'Горячие', Icon: HotIcon, link: 'hot'},
