@@ -16,10 +16,7 @@ export const Modal = () => {
   const navigate = useNavigate();
   const overlayRef = useRef(null);
   const [showForm, setShowForm] = useState(false);
-  const [post, status] = useCommentsData(id);
-  console.log(status);
-  console.log(post[0]);
-  console.log(id);
+  const [post, status, comments] = useCommentsData(id);
 
   const handleClick = (e) => {
     const target = e.target;
@@ -62,8 +59,7 @@ export const Modal = () => {
         {status === 'error' && 'ошибка'}
         {status === 'loaded' && (
           <>
-            <h2 className={style.title}>{post[0].title}</h2>
-
+            <h2 className={style.title}>{post.title}</h2>
             <div className={style.content}>
               <Markdown options={{
                 overrides: {
@@ -74,17 +70,17 @@ export const Modal = () => {
                   },
                 },
               }}>
-                {post[0].selftext}
+                {post.selftext}
               </Markdown>
             </div>
+            <p className={style.author}>{post.author}</p>
 
-            <p className={style.author}>{post[0].author}</p>
             { showForm ?
             (
             <FormComment/>
           ) : (<button className={style.btn}
             onClick={() => setShowForm(true)}>Написать комментарий</button>)}
-            <Comments comments={post[1]}/>
+            <Comments comments={comments}/>
           </>
         )}
         <button className={style.close} onClick={closeOnIcon}>
@@ -98,11 +94,10 @@ export const Modal = () => {
 
 
 Modal.propTypes = {
-  post: PropTypes.any,
   title: PropTypes.string,
   author: PropTypes.string,
   markdown: PropTypes.string,
   closeModal: PropTypes.func,
-  comments: PropTypes.string,
+  comments: PropTypes.any,
 };
 

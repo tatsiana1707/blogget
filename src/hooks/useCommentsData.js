@@ -6,13 +6,13 @@ import {commentsRequestAsync} from '../store/comments/commentsDataAction';
 export const useCommentsData = (id) => {
   const token = useSelector(state => state.token.token);
   const dispatch = useDispatch();
-  const data = useSelector(state => state.commentsData.data);
-  const status = useSelector(state => state.commentsData.status);
+  const post = useSelector(state => state.comments.post);
+  const comments = useSelector(state => state.comments.comments);
+  const status = useSelector(state => state.comments.status);
 
   useEffect(() => {
     if (!token) return;
     dispatch(commentsRequestAsync(id));
   }, [token]);
-
-  return [data, status];
+  return [post, status, comments];
 };
