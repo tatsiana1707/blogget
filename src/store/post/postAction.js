@@ -27,18 +27,21 @@ export const postRequestAsync = (newPage) => (dispatch, getState) => {
       Authorization: `bearer ${token}`,
     },
   })
-    .then(({data}) => {
+    .then(({data: {data}}) => {
+      console.log(data.children);
       console.log(data);
       if (after) {
         console.log(after);
         dispatch(
-          postsSlice.actions.postRequestSuccessAfter({data}));
+          postsSlice.actions.postRequestSuccessAfter(
+            {data}));
+        console.log(data);
       } else {
         dispatch(postsSlice.actions.postRequestSuccess({data}));
+        console.log(data);
       }
     })
     .catch((err) => {
       dispatch(postsSlice.actions.postRequestError(err.toString()));
     });
 };
-

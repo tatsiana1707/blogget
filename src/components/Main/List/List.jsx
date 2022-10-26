@@ -8,12 +8,13 @@ import {postRequestAsync} from '../../../store/post/postAction';
 
 
 export const List = () => {
+  const data = useSelector(state => state.post.data);
   const endList = useRef(null);
   const dispatch = useDispatch();
   const {page} = useParams();
   console.log(page, 'page');
-  const data = useSelector(state => state.post.data);
 
+  console.log(data);
   useEffect(() => {
     dispatch(postRequestAsync(page));
     console.log(page);
@@ -37,7 +38,7 @@ export const List = () => {
       }
     };
   }, [endList.current]);
-
+  console.log(data);
   return (
     <>
       <ul className={style.list}>

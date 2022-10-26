@@ -18,26 +18,30 @@ export const postsSlice = createSlice({
       state.error = '';
     },
     postRequestSuccess: (state, action) => {
+      console.log('action', action);
+      console.log('action', action.payload.data.after);
       state.loading = false;
-      state.data = action.payload.data.data.children;
+      state.data = action.payload.data.children;
       state.error = '';
-      state.after = action.payload.data.data.after;
-      state.isLast = !action.payload.data.data.after;
+      state.after = action.payload.data.after;
+      state.isLast = !action.payload.data.after;
     },
     postRequestSuccessAfter: (state, action) => {
+      console.log('action', action);
+      console.log('action', action.payload.data.after);
       state.loading = false;
-      state.after = action.payload.data.data.after;
-      state.isLast = !action.payload.data.data.after;
-      state.data = [state.payload.data.data.children,
-        ...action.payload.data.data.children];
+      state.after = action.payload.data.after;
+      state.isLast = !action.payload.data.after;
+      state.data = [...state.data, ...action.payload.data.children];
       state.error = '';
     },
-    postRequestError: (state, action) => {
+    postRequestError: (state) => {
       state.loading = false;
       state.error = 'error';
     },
     changePage: (state, action) => {
-      state.page = action.payload.page;
+      console.log('action', action);
+      state.page = action.payload;
       state.after = '';
       state.isLast = false;
     },
