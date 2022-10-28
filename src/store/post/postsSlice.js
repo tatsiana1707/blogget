@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {postRequestAsync} from './postAction';
 
 
 const initialState = {
@@ -13,41 +14,39 @@ export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postRequest: (state) => {
+    changePage: (state, action) => {
+      console.log('action', action);
+      console.log('page success', state.page);
+      state.page = action.payload;
+      state.isLast = false;
+      state.data = [];
+      state.error = '';
+      state.after = '';
+    },
+    loading: (state) => {
+      state.loading = true;
+    }
+  },
+  extraReducers: {
+    [postRequestAsync.pending.type]: (state) => {
       state.loading = true;
       state.error = '';
     },
-    postRequestSuccess: (state, action) => {
+    [postRequestAsync.fulfilled.type]: (state, action) => {
+      console.log('data success', state.data);
       console.log('action', action);
-      console.log('action', action.payload.data.after);
       state.loading = false;
-      state.data = action.payload.data.children;
       state.error = '';
-      state.after = action.payload.data.after;
-      state.isLast = !action.payload.data.after;
+      state.after = action.payload.after;
+      state.isLast = !action.payload.after;
+      state.data = action.payload.data;
     },
-    postRequestSuccessAfter: (state, action) => {
-      console.log('action', action);
-      console.log('action', action.payload.data.after);
-      state.loading = false;
-      state.after = action.payload.data.after;
-      state.isLast = !action.payload.data.after;
-      state.data = [...state.data, ...action.payload.data.children];
-      state.error = '';
-    },
-    postRequestError: (state) => {
+    [postRequestAsync.rejected.type]: (state) => {
       state.loading = false;
       state.error = 'error';
-    },
-    changePage: (state, action) => {
-      console.log('action', action);
-      state.page = action.payload;
-      state.after = '';
-      state.isLast = false;
     },
   }
 });
 console.log(postsSlice);
-
+export const {changePage, loading} = postsSlice.actions;
 export default postsSlice.reducer;
-

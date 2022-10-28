@@ -29,5 +29,5 @@ export const commentsSlice = createSlice({
     },
   },
 });
-console.log(commentsSlice);
+
 export default commentsSlice.reducer;
