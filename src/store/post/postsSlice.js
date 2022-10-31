@@ -16,7 +16,7 @@ export const postsSlice = createSlice({
   reducers: {
     changePage: (state, action) => {
       console.log('action', action);
-      console.log('page success', state.page);
+      console.log('page success', state.data);
       state.page = action.payload;
       state.isLast = false;
       state.data = [];
@@ -33,7 +33,7 @@ export const postsSlice = createSlice({
       state.error = '';
     },
     [postRequestAsync.fulfilled.type]: (state, action) => {
-      console.log('data success', state.data);
+      console.log('data success', state);
       console.log('action', action);
       state.loading = false;
       state.error = '';

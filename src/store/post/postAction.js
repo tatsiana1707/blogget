@@ -3,7 +3,6 @@ import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {changePage} from './postsSlice';
 
-
 export const postRequestAsync = createAsyncThunk(
   'posts/fetch',
   (newPage, {getState, dispatch}) => {
@@ -14,15 +13,13 @@ export const postRequestAsync = createAsyncThunk(
     }
 
     const token = getState().token.token;
+    const data = getState().post.data;
     const after = getState().post.after;
     const loading = getState().post.loading;
     const isLast = getState().post.isLast;
-    const data = getState().post.data;
     console.log(data);
-    console.log(after, data);
-
+    console.log(after, 'after');
     if (!token || loading || isLast) return;
-    dispatch(loading());
     return axios(
       `${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
         headers: {
@@ -30,13 +27,16 @@ export const postRequestAsync = createAsyncThunk(
         },
       })
       .then(({data: {data}}) => {
-        let posts = data.children;
+        let posts = data;
+        const firstPosts = data.children;
+        console.log(posts);
         console.log(after);
         console.log(posts);
         if (after) {
-          posts = [...data, ...posts];
+          posts = [...firstPosts, ...data];
+          return {posts};
         }
-        return {data: posts, after: data.after, page};
+        return {firstPosts, after: data.after, page};
       })
       .catch((error) => ({error: error.toString()}));
   });
