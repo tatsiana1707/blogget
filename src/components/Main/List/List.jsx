@@ -3,27 +3,24 @@ import style from './List.module.css';
 import Post from './Post';
 import {useRef, useEffect} from 'react';
 import {Outlet, useParams} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {changePage} from '../../../store/post/postsSlice';
+import {useDispatch} from 'react-redux';
+import {postsSlice} from '../../../store/post/postsSlice';
 import {postRequestAsync} from '../../../store/post/postAction';
+import {usePost} from '../../../hooks/usePost';
 
 
 export const List = () => {
-  const data = useSelector(state => state.post.data);
   const endList = useRef(null);
   const dispatch = useDispatch();
   const {page} = useParams();
-  console.log(page, 'page');
+  const [data] = usePost(page);
 
-  console.log(data);
   useEffect(() => {
-    dispatch(changePage(page));
-    console.log(page);
+    dispatch(postsSlice.actions.changePage(page));
   }, [page]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      console.log(entries);
       if (entries[0].isIntersecting) {
         dispatch(postRequestAsync());
       }
@@ -39,7 +36,7 @@ export const List = () => {
       }
     };
   }, [endList.current]);
-  console.log(data);
+
   return (
     <>
       <ul className={style.list}>

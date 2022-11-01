@@ -1,7 +1,7 @@
 import {URL_API} from '../../api/const';
 import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {changePage} from './postsSlice';
+import {postsSlice} from './postsSlice';
 
 export const postRequestAsync = createAsyncThunk(
   'posts/fetch',
@@ -9,17 +9,17 @@ export const postRequestAsync = createAsyncThunk(
     let page = getState().post.page;
     if (newPage) {
       page = newPage;
-      dispatch(changePage(page));
+      dispatch(postsSlice.actions.changePage(page));
     }
 
+    const state = getState().post;
     const token = getState().token.token;
-    const data = getState().post.data;
-    const after = getState().post.after;
-    const loading = getState().post.loading;
-    const isLast = getState().post.isLast;
-    console.log(data);
-    console.log(after, 'after');
-    if (!token || loading || isLast) return;
+    const {data: posts, after, loading, isLast} = state;
+
+    if (!page || loading || isLast) return state;
+    dispatch(postsSlice.actions.loading());
+
+
     return axios(
       `${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
         headers: {
@@ -27,16 +27,10 @@ export const postRequestAsync = createAsyncThunk(
         },
       })
       .then(({data: {data}}) => {
-        let posts = data;
-        const firstPosts = data.children;
-        console.log(posts);
-        console.log(after);
-        console.log(posts);
         if (after) {
-          posts = [...firstPosts, ...data];
-          return {posts};
+          return {data: [...posts, ...data.children], after: data.after};
         }
-        return {firstPosts, after: data.after, page};
+        return {data: data.children, after: data.after};
       })
       .catch((error) => ({error: error.toString()}));
   });

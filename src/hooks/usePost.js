@@ -1,22 +1,19 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {postRequestAsync} from '../store/action/postAction';
+import {postRequestAsync} from '../store/post/postAction';
 
 
-export const usePost = () => {
+export const usePost = page => {
   const data = useSelector(state => state.post.data);
   const token = useSelector(state => state.token.token);
   const loading = useSelector(state => state.post.loading);
-  const after = useSelector(state => state.post.after);
-  console.log(after);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!token) return;
-    dispatch(postRequestAsync());
+    dispatch(postRequestAsync(page));
   },
   [token]);
 
-  console.log(data, loading);
   return [data, loading];
 };
 
