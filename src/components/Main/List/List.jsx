@@ -14,7 +14,6 @@ export const List = () => {
   const dispatch = useDispatch();
   const {page} = useParams();
   const [data] = usePost(page);
-
   useEffect(() => {
     dispatch(postsSlice.actions.changePage(page));
   }, [page]);

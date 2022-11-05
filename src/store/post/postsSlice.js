@@ -8,6 +8,7 @@ const initialState = {
   error: '',
   after: '',
   isLast: false,
+  page: '',
 };
 
 export const postsSlice = createSlice({
