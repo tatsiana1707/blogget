@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.13",
     "axios": "^1.0.0",
     "classnames": "^2.3.2",
     "markdown-to-jsx": "^7.1.7",
@@ -37,7 +38,7 @@
   },
   "browserslist": {
     "production": [
-      "not dead",
+      ">0.2%",
       "not op_mini all"
     ],
     "development": [
