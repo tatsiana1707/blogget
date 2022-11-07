@@ -16,7 +16,7 @@ export const postRequestAsync = createAsyncThunk(
     const token = getState().token.token;
     const {data: posts, after, loading, isLast} = state;
 
-    if (!page || loading || isLast) return state;
+    if (!token || !page || loading || isLast) return state;
     dispatch(postsSlice.actions.loading());
 
 

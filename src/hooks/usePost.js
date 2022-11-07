@@ -8,6 +8,7 @@ export const usePost = page => {
   const token = useSelector(state => state.token.token);
   const loading = useSelector(state => state.post.loading);
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!token) return;
     dispatch(postRequestAsync(page));

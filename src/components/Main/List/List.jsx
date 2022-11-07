@@ -14,8 +14,6 @@ export const List = () => {
   const dispatch = useDispatch();
   const {page} = useParams();
   const [data] = usePost(page);
-  console.log(data);
-  if (!data.length || data === undefined || data === null) return;
 
   useEffect(() => {
     dispatch(postsSlice.actions.changePage(page));

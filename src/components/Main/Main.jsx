@@ -2,6 +2,7 @@ import List from './List';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import Modal from '../Modal';
 import Home from '../../pages/Home';
+import NotFound from '../../pages/NotFound';
 import {MainLayout} from '../../pages/MainLayout';
 import style from '../Main/Main.module.css';
 import Layout from '../Layout';
@@ -22,7 +23,7 @@ export const Main = () => (
           <Route path='category/home' element={<Navigate to='/' />}/>
           <Route path='auth' element={<Navigate to='/' />} />
         </Route>
-        <Route path='*' element={<Home text='404'/>} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>
   </main>
